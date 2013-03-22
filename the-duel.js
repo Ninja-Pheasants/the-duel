@@ -1,7 +1,6 @@
 var argv = require('optimist').argv;
 var express = require('express');
 var ejs = require('ejs');
-var request = require('request');
 var _ = underscore = require('underscore');
 var fs = require('fs');
 
