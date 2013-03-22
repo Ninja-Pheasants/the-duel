@@ -27,12 +27,16 @@ app.engine('html', require('ejs').renderFile);
 var DUEL_IS_OPEN = false;
 
 VOTI =  {
+	aperto: DUEL_IS_OPEN,
 	giuria: { a: 0, b: 0 },
 	pubblico: { a: 0, b: 0 },
 };
 
+var LABEL_DUELLO_CHIUSO = 'Il duello è chiuso.';
+
 //using
 app.use(function(req, res, next){ //on each request coming to our server...
+	VOTI.aperto = DUEL_IS_OPEN;
 	fs.writeFile('VOTI-data.txt', JSON.stringify(VOTI), function (err) {
 		if (err) throw err;
 	});
@@ -50,20 +54,28 @@ app.get('/', function(req, res) {
 	});
 });
 app.get('/vota1', function(req, res) {
-	VOTI.pubblico.a = VOTI.pubblico.a +1; 
+	var messaggio = LABEL_DUELLO_CHIUSO;
+	if (DUEL_IS_OPEN) {
+		VOTI.pubblico.a = VOTI.pubblico.a +1; 
+		messaggio = 'Hai votato 1';
+	}
 	res.render('index', { 
 		_ : underscore,
-		messaggio: 'Hai votato 1',
+		messaggio: messaggio,
 		risultati: null,
 		DUEL_IS_OPEN: DUEL_IS_OPEN,
 		VOTI: VOTI
 	});
 });
 app.get('/vota2', function(req, res) {
-	VOTI.pubblico.b = VOTI.pubblico.b +1;
+	var messaggio = LABEL_DUELLO_CHIUSO;
+	if (DUEL_IS_OPEN) {
+		VOTI.pubblico.b = VOTI.pubblico.b +1;
+		messaggio = 'Hai votato 2';
+	}
 	res.render('index', { 
 		_ : underscore,
-		messaggio: 'Hai votato 2',
+		messaggio: messaggio,
 		risultati: null,
 		DUEL_IS_OPEN: DUEL_IS_OPEN,
 		VOTI: VOTI
