@@ -52,7 +52,7 @@ app.use(function(req, res, next){ //on each request coming to our server...
 });
 
 var auth = express.basicAuth(function(user, pass, callback) {
-	var result = (user === 'testUser' && pass === 'testPass');
+	var result = (user === (process.env.THEDUEL_USERNAME||'user') && pass === (process.env.THEDUEL_PASSWORD||'pass'));
 	callback(null /* error */, result);
 });
 
