@@ -1,16 +1,17 @@
 {
-  "name": "the-duel",
-  "version": "0.0.1",
-  "engines": {
-    "node": "0.8.x",
-    "npm": "1.1.x"
-  },
-  "dependencies": {
-    "express": "3.0.x",
-    "ejs": "0.8.x",
-    "optimist": "*",
-    "buffered-reader": "1.0.x",
-    "request": "2.14.x",
-    "underscore": "*"
-  }
+	"name": "the-duel",
+	"version": "0.0.1",
+	"engines": {
+		"node": "0.8.x",
+		"npm": "1.2.x"
+	},
+	"scripts": {
+		"web": "node the-duel.js"
+	},
+	"dependencies": {
+		"express": "3.0.x",
+		"ejs": "0.8.x",
+		"optimist": "*",
+		"underscore": "*"
+	}
 }

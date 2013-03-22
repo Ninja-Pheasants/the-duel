@@ -1,0 +1,1 @@
+{"aperto":false,"giuria":{"a":10,"b":20},"pubblico":{"a":30,"b":40}}
