@@ -51,6 +51,12 @@ app.use(function(req, res, next){ //on each request coming to our server...
 	next(); //and move on...
 });
 
+var auth = express.basicAuth(function(user, pass, callback) {
+	var result = (user === 'testUser' && pass === 'testPass');
+	callback(null /* error */, result);
+});
+
+
 //routing
 app.get('/', function(req, res) {
 	res.render('index', { 
@@ -85,16 +91,25 @@ app.get('/risultati', function(req, res) {
 	res.send(JSON.stringify(VOTI));
 });
 
-app.get('/open', function(req, res) {
+app.get('/open', auth, function(req, res) {
 	DUEL_IS_OPEN = true;
 	res.redirect("/");
 })
 
-app.get('/close', function(req, res) {
+app.get('/close', auth, function(req, res) {
 	DUEL_IS_OPEN = false;
 	res.redirect("/");
 })
 
+app.get('/protected', auth, function (req, res) {
+	res.render('protected', {
+		_ : underscore,
+		messaggio: vota('b'),
+		risultati: null,
+		DUEL_IS_OPEN: DUEL_IS_OPEN,
+		VOTI: VOTI
+	});
+})
 
 //utility
 function vota(candidato, giuria) {
