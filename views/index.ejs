@@ -1,16 +1,70 @@
 <!DOCTYPE html>
-<html>
-	<head>
-	</head>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>The Duel - Grasso vs Travaglio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Le styles -->
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap.no-icons.min.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/bootswatch/2.3.1/superhero/bootstrap.min.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css" rel="stylesheet">
+    <style>
+      body {
+        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+      }
+    </style>
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-responsive.min.css" rel="stylesheet">
+
+    <link href="the-duel.css" rel="stylesheet">
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/0.6.0/fastclick.min.js"></script>
+
+    <script>
+      window.addEventListener('load', function() {
+          new FastClick(document.body);
+      }, false);
+    </script>
+
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="apple-touch-icon-114-precomposed.png">
+      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="apple-touch-icon-72-precomposed.png">
+                    <link rel="apple-touch-icon-precomposed" href="apple-touch-icon-57-precomposed.png">
+                                   <link rel="shortcut icon" href="favicon.png">
+  </head>
+
 	<body>
-		
-		DUEL_IS_OPEN: <%= DUEL_IS_OPEN %><br />
 
-		<hr >
+		<div class="container">
 
-		<a href="/open">open</a>
-		<a href="/close">close</a>
-		
+			<header class="text-center jumbotron">
+				<h1 class="lead muted">THE <i class="icon-exchange icon-white"></i> DUEL</h1>
+				<h2>Marco Travaglio vs Pietro Grasso</h2>
+				<div class="lead">
+					<% if(DUEL_IS_OPEN) { %>
+						<p>
+						  <span class="label label-success"><i class="icon-unlock"></i> In questo momento il duello è APERTO <i class="icon-unlock"></i></span>
+						</p>
+						<!-- If sono loggato da giurato -->
+						<p>
+						  <a href="/close" class="btn btn-danger">Chiudi il duello</a>
+						</p>
+						<!--// If sono loggato da giurato -->
+					<% } else { %>
+						<div class="alert">
+						  <span class="label label-important"><i class="icon-lock"></i> In questo momento il duello è CHIUSO <i class="icon-lock"></i></span><br />
+						  Comincerà nel momento in cui sarà dato fuoco alle polveri anche in TV.
+						</div>
+						<!-- If sono loggato da giurato -->
+						<p>
+							<a href="/open" class="btn btn-success">Apri il duello</a>
+						</p>
+						<!--// If sono loggato da giurato -->
+					<% } %>
+				</div>
+			</header>
+
 		<hr >
 
 		<% if (messaggio) { %>
@@ -24,13 +78,32 @@
 
 		<hr >
 
-		Voti per "vota1": <%= VOTI.pubblico.a %> (giuria: <%= VOTI.giuria.a %>) <%= (VOTI.pubblico.a*100)/(VOTI.pubblico.a+VOTI.pubblico.b) %>% <br />
-		Voti per "vota2": <%= VOTI.pubblico.b %> (giuria: <%= VOTI.giuria.b %>) <%= (VOTI.pubblico.b*100)/(VOTI.pubblico.a+VOTI.pubblico.b) %>% <br />
+		<div role="main" id="voti">
+			<div class="progress">
+				<div class="bar bar-warning text-right" style="width: <%= (VOTI.pubblico.a*100)/(VOTI.pubblico.a+VOTI.pubblico.b) %>%;">Travaglio <%= (VOTI.pubblico.a*100)/(VOTI.pubblico.a+VOTI.pubblico.b) %>% <img src="travaglio.jpg" /></div>
+				<div class="bar bar-danger text-left" style="width: <%= (VOTI.pubblico.b*100)/(VOTI.pubblico.a+VOTI.pubblico.b) %>%;"><img src="grasso.jpg" /> <%= (VOTI.pubblico.b*100)/(VOTI.pubblico.a+VOTI.pubblico.b) %>% Grasso</div>
+			</div>
+		</div>
+
+		Voti per "vota1": <%= VOTI.pubblico.a %> (giuria: <%= VOTI.giuria.a %>) <br />
+		Voti per "vota2": <%= VOTI.pubblico.b %> (giuria: <%= VOTI.giuria.b %>)
 		
 		<hr >
 		<a href="/risultati">risultati json</a>
 		
 
-	</body>
-	</html>
+    <div class="footer">
+      <p class="text-right">Footer Ipsum</p>
+    </div>
+
+  </div> <!-- /container -->
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <!--
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    -->
+  </body>
 </html>
