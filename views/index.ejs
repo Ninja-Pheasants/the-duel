@@ -46,20 +46,27 @@
 						<p>
 						  <span class="label label-success"><i class="icon-unlock"></i> In questo momento il duello è APERTO <i class="icon-unlock"></i></span>
 						</p>
+						
+						
 						<!-- If sono loggato da giurato -->
-						<p>
-						  <a href="/close" class="btn btn-danger">Chiudi il duello</a>
-						</p>
+						<% if (session.user) { %>
+							<p>
+								<a href="/close" class="btn btn-danger">Chiudi il duello</a>
+							</p>
+						<% } %>
 						<!--// If sono loggato da giurato -->
+
 					<% } else { %>
 						<div class="alert">
 						  <span class="label label-important"><i class="icon-lock"></i> In questo momento il duello è CHIUSO <i class="icon-lock"></i></span><br />
 						  Comincerà nel momento in cui sarà dato fuoco alle polveri anche in TV.
 						</div>
 						<!-- If sono loggato da giurato -->
-						<p>
-							<a href="/open" class="btn btn-success">Apri il duello</a>
-						</p>
+						<% if (session.user) { %>
+							<p>
+								<a href="/open" class="btn btn-success">Apri il duello</a>
+							</p>
+						<% } %>
 						<!--// If sono loggato da giurato -->
 					<% } %>
 				</div>
@@ -80,8 +87,16 @@
 
 		<div role="main" id="voti">
 			<div class="progress">
-				<div class="bar bar-warning text-right" style="width: <%= (VOTI.pubblico.a*100)/(VOTI.pubblico.a+VOTI.pubblico.b) %>%;">Travaglio <%= (VOTI.pubblico.a*100)/(VOTI.pubblico.a+VOTI.pubblico.b) %>% <img src="travaglio.jpg" /></div>
-				<div class="bar bar-danger text-left" style="width: <%= (VOTI.pubblico.b*100)/(VOTI.pubblico.a+VOTI.pubblico.b) %>%;"><img src="grasso.jpg" /> <%= (VOTI.pubblico.b*100)/(VOTI.pubblico.a+VOTI.pubblico.b) %>% Grasso</div>
+				<% var percentualeA = ((VOTI.pubblico.a*100)/(VOTI.pubblico.a+VOTI.pubblico.b)).toFixed(2); %>
+				<% var percentualeB = ((VOTI.pubblico.b*100)/(VOTI.pubblico.a+VOTI.pubblico.b)).toFixed(2); %>
+				<div class="bar bar-warning text-right" style="width: <%= percentualeA %>%;">
+					Travaglio <%= percentualeA %>%
+					<img src="travaglio.jpg" />
+				</div>
+				<div class="bar bar-danger text-left" style="width: <%= percentualeB %>%;">
+					<img src="grasso.jpg" />
+					<%= percentualeB %>% Grasso
+				</div>
 			</div>
 		</div>
 
@@ -90,11 +105,18 @@
 		
 		<hr >
 		<a href="/risultati">risultati json</a>
-		
 
-    <div class="footer">
-      <p class="text-right">Footer Ipsum</p>
-    </div>
+	    <div class="footer">
+	    	<p class="text-right">
+	    		<!-- If NON sono loggato da giurato -->
+				<% if (!session.user) { %>
+					<a class="btn" href="/login">Login Giuriato</a>
+				<% } else { %>
+					<a class="btn" href="/logout">Logout</a>
+				<% } %>
+	    	</p>
+	    	<p class="text-right">Footer Ipsum</p>
+	    </div>
 
   </div> <!-- /container -->
 
