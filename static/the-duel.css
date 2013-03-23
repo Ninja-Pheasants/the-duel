@@ -21,3 +21,23 @@
   text-align: right;
   padding-right: 10px;
 }
+
+#voti .vota {
+  font-size: 20px;
+  font-family: "Oswald", Arial, sans-serif;
+  height: 70px;
+  line-height: 1.5;
+  margin-top: 20px; /* ( height .progress - height .vota ) / 2 */
+}
+
+.margin-medium-vertical {
+  margin: 20px 0;
+}
+
+.margin-medium-top {
+  margin-top: 10px;
+}
+
+.margin-medium-bottom {
+  margin-bottom: 10px;
+}

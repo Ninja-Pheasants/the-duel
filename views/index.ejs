@@ -1,161 +1,182 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>The Duel - Grasso vs Travaglio</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+  <meta charset="utf-8" />
+  <title>The Duel - Grasso vs Travaglio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Le styles -->
-    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap.no-icons.min.css" rel="stylesheet">
-    <link href="//netdna.bootstrapcdn.com/bootswatch/2.3.1/superhero/bootstrap.min.css" rel="stylesheet">
-    <link href="//netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css" rel="stylesheet">
-    <style>
-      body {
-        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
-      }
-    </style>
-    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-responsive.min.css" rel="stylesheet">
+  <!-- Le styles -->
+  <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap.no-icons.min.css" rel="stylesheet">
+  <link href="//netdna.bootstrapcdn.com/bootswatch/2.3.1/superhero/bootstrap.min.css" rel="stylesheet">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css" rel="stylesheet">
+  <style>
+  body {
+    padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+  }
+  </style>
+  <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-responsive.min.css" rel="stylesheet">
 
-    <link href="the-duel.css" rel="stylesheet">
+  <link href="the-duel.css" rel="stylesheet">
 
-    <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/0.6.0/fastclick.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/0.6.0/fastclick.min.js"></script>
 
-    <script>
-      window.addEventListener('load', function() {
-          new FastClick(document.body);
-      }, false);
-    </script>
+  <script>
+  window.addEventListener('load', function() {
+    new FastClick(document.body);
+  }, false);
+  </script>
 
-    <!-- Fav and touch icons -->
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="apple-touch-icon-114-precomposed.png">
-      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="apple-touch-icon-72-precomposed.png">
-                    <link rel="apple-touch-icon-precomposed" href="apple-touch-icon-57-precomposed.png">
-                                   <link rel="shortcut icon" href="favicon.png">
-  </head>
+  <!-- Fav and touch icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="apple-touch-icon-144-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="apple-touch-icon-114-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="apple-touch-icon-72-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" href="apple-touch-icon-57-precomposed.png">
+  <link rel="shortcut icon" href="favicon.png">
+</head>
 
-	<body>
+<body>
 
-		<div class="container">
-			== Mobile Client? <%= clientIsMobile %> ==
-			<header class="text-center jumbotron">
-				<h1 class="lead muted text-left">THE <i class="icon-exchange icon-white"></i> DUEL</h1>
-				<h2>Marco Travaglio vs Pietro Grasso</h2>
-				<div class="lead">
-					<% if(DUEL_IS_OPEN) { %>
-						<p>
-						  <span class="label label-success"><i class="icon-unlock"></i> In questo momento il duello è APERTO <i class="icon-unlock"></i></span>
-						</p>
-						<!-- If sono loggato da giurato -->
-						<% if (session.user) { %>
-							<hr />
-							<p>
-								<a href="/close" class="btn btn-danger">Chiudi il duello</a> 
-								<a href="/reset" class="btn btn-danger">Resetta i dati</a>
-							</p>
+  <div class="container">
 
-							<hr />
-							<form action="/voto-giurato" method="post">
-								Voto giurato:<br />
-								votaA: <input type="radio" name="candidato" value="a" />
-								votaB: <input type="radio" name="candidato" value="b" />
-								<br />
-								messaggio: 
-								<textarea name="messaggio"></textarea>
-								<br />
-								voto:
-								<select name="voto">
-									<option value="1">1</option>
-									<option value="2">2</option>
-									<option value="3">3</option>
-									<option value="4">4</option>
-									<option value="5">5</option>
-									<option value="6">6</option>
-									<option value="7">7</option>
-									<option value="8">8</option>
-									<option value="9">9</option>
-									<option value="10">10</option>
-								</select>
-								<input type="submit" />
-							</form>
-						<% } %>
-						<!--// If sono loggato da giurato -->
+   <header class="text-center jumbotron">
+    <h1 class="lead muted text-left">THE <i class="icon-exchange icon-white"></i> DUEL</h1>
+    <h2>Marco Travaglio vs Pietro Grasso</h2>
+    <div class="lead">
+     <% if(DUEL_IS_OPEN) { %>
+     <p>
+      <span class="label label-success"><i class="icon-unlock"></i> In questo momento il duello è APERTO <i class="icon-unlock"></i></span>
+    </p>
+    <!-- If sono loggato da giurato -->
+    <% if (session.user) { %>
+    <hr />
+    <p>
+      <a href="/close" class="btn btn-danger">Chiudi il duello</a>
+      <a href="/reset" class="btn btn-danger">Resetta i dati</a>
+    </p>
 
-					<% } else { %>
-						<div class="alert">
-						  <span class="label label-important"><i class="icon-lock"></i> In questo momento il duello è CHIUSO <i class="icon-lock"></i></span><br />
-						  Comincerà nel momento in cui sarà dato fuoco alle polveri anche in TV.
-						</div>
-						<!-- If sono loggato da giurato -->
-						<% if (session.user) { %>
-							<p>
-								<a href="/open" class="btn btn-success">Apri il duello</a>
-							</p>
-						<% } %>
-						<!--// If sono loggato da giurato -->
-					<% } %>
-				</div>
-			</header>
+    <hr />
+    <form action="/voto-giurato" method="post">
+      Voto giurato:<br />
+      votaA: <input type="radio" name="candidato" value="a" />
+      votaB: <input type="radio" name="candidato" value="b" />
+      <br />
+      messaggio:
+      <textarea name="messaggio"></textarea>
+      <br />
+      voto:
+      <select name="voto">
+       <option value="1">1</option>
+       <option value="2">2</option>
+       <option value="3">3</option>
+       <option value="4">4</option>
+       <option value="5">5</option>
+       <option value="6">6</option>
+       <option value="7">7</option>
+       <option value="8">8</option>
+       <option value="9">9</option>
+       <option value="10">10</option>
+     </select>
+     <input type="submit" />
+   </form>
+   <% } %>
+   <!--// If sono loggato da giurato -->
 
-		<hr >
+   <% } else { %>
+   <div class="alert">
+    <span class="label label-important"><i class="icon-lock"></i> In questo momento il duello è CHIUSO <i class="icon-lock"></i></span><br />
+    Comincerà nel momento in cui sarà dato fuoco alle polveri anche in TV.
+  </div>
+  <!-- If sono loggato da giurato -->
+  <% if (session.user) { %>
+  <p>
+    <a href="/open" class="btn btn-success">Apri il duello</a>
+  </p>
+  <% } %>
+  <!--// If sono loggato da giurato -->
+  <% } %>
+</div>
+</header>
 
-		<% if (session.messaggio) { %>
-			<%= session.messaggio %>
-		<% } else {  %>	
-			<% if (DUEL_IS_OPEN) { %>
-				<a href="/votaA">votaA</a>
-				<a href="/votaB">votaB</a>
-			<% } %> 
-		<% } %> 
+<hr >
 
-		<hr >
+<% if (session.messaggio) { %>
+<div class="row-fluid text-center">
+  <div class="span10 offset1">
+    <div class="alert">
+      <h2 class="alert-heading"><%= session.messaggio %></h2>
+      <p>
+        Ma il duello non è ancora finito!<br />
+        Chi metterà a segno il prossimo colpo?
+      </p>
+    </div>
+    <p class="margin-medium-vertical"><a href="/" class="btn btn-inverse btn-large"><i class="icon-exchange"></i> Vota ancora!</a></p>
+  </div>
+</div>
+<% } %>
 
-		<div role="main" id="voti">
-			<div class="progress">
-				<% var percentualeA = ((VOTI.pubblico.a*100)/(VOTI.pubblico.a+VOTI.pubblico.b)).toFixed(2); %>
-				<% var percentualeB = ((VOTI.pubblico.b*100)/(VOTI.pubblico.a+VOTI.pubblico.b)).toFixed(2); %>
-				<div class="bar bar-warning text-right" style="width: <%= percentualeA %>%;">
-					Travaglio <%= percentualeA %>%
-					<img src="travaglio.jpg" />
-				</div>
-				<div class="bar bar-danger text-left" style="width: <%= percentualeB %>%;">
-					<img src="grasso.jpg" />
-					<%= percentualeB %>% Grasso
-				</div>
-			</div>
-		</div>
-		
-			
-			<p>Voti per "votaA": <%= VOTI.pubblico.a %> (giuria: <%= VOTI.giuria.a %>)</p>
-			<p>Voti per "votaB": <%= VOTI.pubblico.b %> (giuria: <%= VOTI.giuria.b %>)</p>
+<div role="main" id="voti" class="row-fluid">
+  <% if (DUEL_IS_OPEN && !session.messaggio) { %>
+  <a href="/votaA" class="btn btn-inverse span1 vota">vota&nbsp;<i class="icon-pencil"></i></a>
+  <% } %>
+  <div class="progress span10 margin-medium-vertical<% if (session.messaggio) { %> offset1<% } %>">
+    <% var percentualeA = ((VOTI.pubblico.a*100)/(VOTI.pubblico.a+VOTI.pubblico.b)).toFixed(2); %>
+    <% var percentualeB = ((VOTI.pubblico.b*100)/(VOTI.pubblico.a+VOTI.pubblico.b)).toFixed(2); %>
+    <div class="bar bar-warning text-right" style="width: <%= percentualeA %>%;">
+     Travaglio <%= percentualeA %>%
+     <img src="travaglio.jpg" />
+   </div>
+   <div class="bar bar-danger text-left" style="width: <%= percentualeB %>%;">
+     <img src="grasso.jpg" />
+     <%= percentualeB %>% Grasso
+   </div>
+ </div>
+ <% if (DUEL_IS_OPEN && !session.messaggio) { %>
+ <a href="/votaB" class="btn btn-inverse span1 vota pull-right"><i class="icon-legal"></i>&nbsp;vota</a>
+ <% } %>
+</div>
 
-			<%	_.each(VOTI.messaggiGiuria, function(item, index) { %>
-					<p>
-						<%= dateformat(item.data, 'shortTime') %>,
-						<%= item.candidato %>
-						&#32;
-						<%= item.voto %>, 
-						&#32;
-						<%= item.messaggio %>
-					</p>
-			<% }); %>
+<p class="margin-medium-bottom text-center">
+  <small>
+    Dettaglio Voti: <strong>Travaglio</strong> <%= VOTI.pubblico.a %> (giuria: <%= VOTI.giuria.a %>) - <strong>Grasso</strong> <%= VOTI.pubblico.b %> (giuria: <%= VOTI.giuria.b %>)
+  </small>
+</p>
 
-		<hr >
-		<a href="/risultati">risultati json</a>
+<%	_.each(VOTI.messaggiGiuria, function(item, index) { %>
+<p>
+  <%= dateformat(item.data, 'shortTime') %>,
+  <%= item.candidato %>
+  &#32;
+  <%= item.voto %>,
+  &#32;
+  <%= item.messaggio %>
+</p>
+<% }); %>
 
-	    <div class="footer">
-	    	<p class="text-right">
-	    		<!-- If NON sono loggato da giurato -->
-				<% if (!session.user) { %>
-					<a class="btn" href="/login">Login Giuriato</a>
-				<% } else { %>
-					<a class="btn" href="/logout">Logout</a>
-				<% } %>
-	    	</p>
-	    	<p class="text-right">Footer Ipsum</p>
-	    </div>
+<hr >
 
-  </div> <!-- /container -->
+<footer class="footer">
+
+  <ul class="nav nav-pills">
+    <li class="pull-left">
+      <a href="/risultati">Risultati JSON</a>
+    </li>
+    <li class="pull-right">
+     <!-- If NON sono loggato da giurato -->
+     <% if (!session.user) { %>
+     <a href="/login">Login Giuria</a>
+     <% } else { %>
+     <a href="/logout">Logout</a>
+     <% } %>
+   </li>
+  </ul>
+
+  <p class="clearfix text-center">
+    == Mobile Client? <%= clientIsMobile %> // if true, then interessa l'app? ==
+  </p>
+
+</footer>
+
+</div> <!-- /container -->
 
     <!-- Le javascript
     ================================================== -->
@@ -165,7 +186,7 @@
     <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
     -->
 
-<!-- disattivato in attesa di configurare come si spetta (Willy)
+    <!-- disattivato in attesa di configurare come si spetta (Willy)
     <script>
         if (window.location.host != 'localhost') {
             (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -177,6 +198,6 @@
             ga('send', 'pageview');
         }
     </script>
--->
-  </body>
+  -->
+</body>
 </html>
