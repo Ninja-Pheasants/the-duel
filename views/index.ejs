@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>The Duel - <%= process.env.CANDIDATO_A %> vs <%= process.env.CANDIDATO_B %></title>
+  <title>The Duel - <%= CANDIDATI.a %> vs <%= CANDIDATI.b %></title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- Le styles -->
@@ -40,7 +40,7 @@
 
    <header class="text-center jumbotron">
     <h1 class="lead muted text-left">THE <i class="icon-exchange icon-white"></i> DUEL</h1>
-    <h2>Marco <%= process.env.CANDIDATO_A %> vs Pietro <%= process.env.CANDIDATO_B %></h2>
+    <h2>Marco <%= CANDIDATI.a %> vs Pietro <%= CANDIDATI.b %></h2>
     <div class="lead">
      <% if(DUEL_IS_OPEN) { %>
      <p>
@@ -57,8 +57,8 @@
     <hr />
     <form action="/voto-giurato" method="post">
       Voto giurato:<br />
-      vota <%= process.env.CANDIDATO_A %>: <input type="radio" name="candidato" value="a" />
-      vota <%= process.env.CANDIDATO_B %>: <input type="radio" name="candidato" value="b" />
+      vota <%= CANDIDATI.a %>: <input type="radio" name="candidato" value="a" />
+      vota <%= CANDIDATI.b %>: <input type="radio" name="candidato" value="b" />
       <br />
       messaggio:
       <textarea name="messaggio"></textarea>
@@ -128,12 +128,12 @@
     <%   percentualeB = 50 %>
     <% } %>
     <div class="bar bar-warning text-right" style="width: <%= percentualeA %>%;">
-     <%= process.env.CANDIDATO_A %> <%= percentualeA %>%
+     <%= CANDIDATI.a %> <%= percentualeA %>%
      <img src="travaglio.jpg" />
    </div>
    <div class="bar bar-danger text-left" style="width: <%= percentualeB %>%;">
      <img src="grasso.jpg" />
-     <%= percentualeB %>% <%= process.env.CANDIDATO_B %>
+     <%= percentualeB %>% <%= CANDIDATI.b %>
    </div>
  </div>
  <% if (DUEL_IS_OPEN && !session.messaggio) { %>
@@ -143,7 +143,7 @@
 
 <p class="margin-medium-bottom text-center">
   <small>
-    Dettaglio Voti: <strong><%= process.env.CANDIDATO_A %></strong> <%= votiTotA %> (giuria: <%= VOTI.giuria.a %>) - <strong><%= process.env.CANDIDATO_B %></strong> <%= votiTotB %> (giuria: <%= VOTI.giuria.b %>)
+    Dettaglio Voti: <strong><%= CANDIDATI.a %></strong> <%= votiTotA %> (giuria: <%= VOTI.giuria.a %>) - <strong><%= CANDIDATI.b %></strong> <%= votiTotB %> (giuria: <%= VOTI.giuria.b %>)
   </small>
 </p>
 
