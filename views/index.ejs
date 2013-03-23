@@ -141,9 +141,12 @@
   </small>
 </p>
 
-<%	_.each(VOTI.messaggiGiuria, function(item, index) { %>
+<%	
+	var messaggiGiuria = VOTI.messaggiGiuria.slice(-5); //gli ultimi 5
+	messaggiGiuria = messaggiGiuria.reverse();
+	_.each(messaggiGiuria, function(item, index) { %>
 <p>
-  <%= dateformat(item.data, 'shortTime') %>,
+  <%= dateformat(item.data, 'shortTime') %>, <!-- dateformat https://npmjs.org/package/dateformat -->
   <%= item.candidato %>
   &#32;
   <%= item.voto %>,
