@@ -118,7 +118,7 @@
   <a href="/votaA" class="btn btn-inverse span1 vota">vota&nbsp;<i class="icon-pencil"></i></a>
   <% } %>
   <div class="progress span10 margin-medium-vertical<% if (session.messaggio) { %> offset1<% } %>">
-	<% 
+	<%
 		var votiTotA = VOTI.pubblico.a+VOTI.giuria.a;
 		var votiTotB = VOTI.pubblico.b+VOTI.giuria.b;
 		var percentualeA = ((votiTotA*100)/(votiTotA+votiTotB)).toFixed(0);
