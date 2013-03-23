@@ -49,7 +49,10 @@
 		]
 	};
 	//provo a leggere il file dei dati salvati
-	try { VOTI = JSON.parse(fs.readFileSync(FILE_VOTI)); }
+	try { 
+		VOTI_dal_file = JSON.parse(fs.readFileSync(FILE_VOTI)); 
+		VOTI = _.extend(VOTI, VOTI_dal_file);
+	}
 	catch (e) { console.log("File dei voti", FILE_VOTI, "non trovato"); }
 
 
@@ -108,7 +111,7 @@
 		});
 	});
 
-	app.get('/vota1', function(req, res) {
+	app.get('/votaA', function(req, res) {
 		res.render('index', { 
 			session: req.session,
 			_ : underscore,
@@ -120,7 +123,7 @@
 		});
 	});
 
-	app.get('/vota2', function(req, res) {
+	app.get('/votaB', function(req, res) {
 		res.render('index', { 
 			session: req.session,
 			_ : underscore,
