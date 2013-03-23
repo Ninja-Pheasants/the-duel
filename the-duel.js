@@ -39,6 +39,10 @@
 	var LABEL_DUELLO_CHIUSO = 'Il duello è chiuso.';
 	var DUEL_IS_OPEN = false;
 	var FILE_VOTI = "./.profile.d/VOTI-data.txt";
+	var CANDIDATI = {
+		a: process.env.CANDIDATO_A||'Travaglio',
+		b: process.env.CANDIDATO_A||'Grasso'
+	}
 	var POSTGRES =  {
 		CONNECTION_STRING: "postgres://" + process.env.THEDUEL_PG_USER +":"+ process.env.THEDUEL_PG_PASS + "@" + process.env.THEDUEL_PG_HOST +":"+ process.env.THEDUEL_PG_PORT + "/"+process.env.THEDUEL_PG_DB,
 		update: 'update "the-duel" set "data" = $1',
@@ -91,7 +95,7 @@
 		else {
 			VOTI.pubblico[candidato] = VOTI.pubblico[candidato] +1;
 		}
-		return messaggio + candidato;
+		return messaggio + CANDIDATI[candidato];
 	};
 
 	var login = function(req, res, callback) { //mette in sessione l'utente
@@ -112,7 +116,8 @@
 			dateformat: dateformat,
 			session: req.session,
 			DUEL_IS_OPEN: DUEL_IS_OPEN,
-			VOTI: VOTI
+			VOTI: VOTI,
+			CANDIDATI: CANDIDATI
 		};
 	};
 
