@@ -119,14 +119,18 @@
   <a href="/votaA" class="btn btn-inverse span1 vota">vota&nbsp;<i class="icon-pencil"></i></a>
   <% } %>
   <div class="progress span10 margin-medium-vertical<% if (session.messaggio) { %> offset1<% } %>">
-    <% var votiTotA = VOTI.pubblico.a+VOTI.giuria.a %>
-    <% var votiTotB = VOTI.pubblico.b+VOTI.giuria.b %>
-    <% var percentualeA = ((votiTotA*100)/(votiTotA+votiTotB)).toFixed(0); %>
-    <% var percentualeB = ((votiTotB*100)/(votiTotA+votiTotB)).toFixed(0); %>
-    <% if ( (votiTotA+votiTotB) == 0 ) { %>
-    <%   percentualeA = 50 %>
-    <%   percentualeB = 50 %>
-    <% } %>
+	<% 
+		var votiTotA = VOTI.pubblico.a+VOTI.giuria.a;
+		var votiTotB = VOTI.pubblico.b+VOTI.giuria.b;
+		var percentualeA = ((votiTotA*100)/(votiTotA+votiTotB)).toFixed(0);
+     	var percentualeB = ((votiTotB*100)/(votiTotA+votiTotB)).toFixed(0);
+		if ( (votiTotA+votiTotB) == 0 ) {
+			percentualeA = 50;
+			percentualeB = 50;
+		}
+		if (percentualeA==2) { percentualeA = 2; percentualeB = 98; }
+		if (percentualeB==2) { percentualeB = 2; percentualeA = 98; }
+	%>
     <div class="bar bar-warning text-right" style="width: <%= percentualeA %>%;">
      <%= CANDIDATI.a %> <%= percentualeA %>%
      <img src="travaglio.jpg" />
