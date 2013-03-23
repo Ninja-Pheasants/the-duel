@@ -5,6 +5,7 @@
 	var _ = underscore = require('underscore');
 	var fs = require('fs');
 	var dateformat = require('dateformat');
+	var pg = require('pg');
 
 
 //command line parameters
@@ -34,26 +35,17 @@
 
 
 //costanti
+	var VOTI = {};
 	var LABEL_DUELLO_CHIUSO = 'Il duello è chiuso.';
 	var DUEL_IS_OPEN = false;
-	var FILE_VOTI = ".profile.d/VOTI-data.txt";
-
-
-//inizializzo di dati
-	var VOTI = {
-		aperto: DUEL_IS_OPEN,
-		giuria: { a: 0, b: 0 },
-		pubblico: { a: 0, b: 0 },
-		messaggiGiuria: [
-
-		]
+	var FILE_VOTI = "./.profile.d/VOTI-data.txt";
+	var POSTGRES =  {
+		CONNECTION_STRING: "postgres://" + process.env.THEDUEL_PG_USER +":"+ process.env.THEDUEL_PG_PASS + "@" + process.env.THEDUEL_PG_HOST +":"+ process.env.THEDUEL_PG_PORT + "/"+process.env.THEDUEL_PG_DB,
+		update: 'update "the-duel" set "data" = $1',
+		select: 'SELECT  * from "the-duel" limit 1',
+		truncate: 'DELETE from "the-duel"'
 	};
-	//provo a leggere il file dei dati salvati
-	try { 
-		VOTI_dal_file = JSON.parse(fs.readFileSync(FILE_VOTI)); 
-		VOTI = _.extend(VOTI, VOTI_dal_file);
-	}
-	catch (e) { console.log("File dei voti", FILE_VOTI, "non trovato"); }
+
 
 
 //funzione di controllo per autenticazione
@@ -64,6 +56,22 @@
 
 
 //utility
+	var initData = function(data) {
+		VOTI = {
+			aperto: false,
+			giuria: { a: 0, b: 0 },
+			pubblico: { a: 0, b: 0 },
+			messaggiGiuria: [
+
+			]
+		};
+		try { 
+			//VOTI_dal_file = JSON.parse(fs.readFileSync(FILE_VOTI)); 
+			VOTI = _.extend(VOTI, data);
+			DUEL_IS_OPEN = VOTI.aperto;
+		}
+		catch (e) { console.log("File dei voti", FILE_VOTI, "non trovato"); }
+	};
 	var detectmobilebrowser = function(UAstring) {
 		var UAstring = UAstring.toLowerCase();
 		return (
@@ -111,10 +119,22 @@
 //using
 	app.use(function(req, res, next){ //on each request coming to our server...
 		VOTI.aperto = DUEL_IS_OPEN;
-		fs.writeFile(FILE_VOTI, JSON.stringify(VOTI), function (err) {
+		/*fs.writeFile(FILE_VOTI, JSON.stringify(VOTI), function (err) {
 			//if (err) throw err;
+		});*/
+		pg.connect(POSTGRES.CONNECTION_STRING, function(err, client, done) {
+			if (err) { console.log("err pg.connect", err); }
+			//console.log("client pg.connect", client);
+			if (!err && client) {
+				//count users
+				client.query(POSTGRES.update, [JSON.stringify(VOTI)], function(err, result) {
+					if (err) { console.log("err client", err); }
+					//done(result.rows[0]||null);
+					done();
+					next(); //and move on...
+				});
+			}
 		});
-		next(); //and move on...
 	});
 
 
@@ -164,6 +184,16 @@
 		res.redirect('/');
 	});
 
+	app.get('/reset', auth, login, function (req, res) {
+		VOTI = {
+			aperto: DUEL_IS_OPEN,
+			giuria: { a: 0, b: 0 },
+			pubblico: { a: 0, b: 0 },
+			messaggiGiuria: []
+		};
+		res.redirect('/');
+	});
+
 	app.get('/login', auth, login, function (req, res) {
 		res.redirect('/');
 	});
@@ -174,5 +204,19 @@
 
 
 //start
-	app.listen(options.port);
-	console.log('http://localhost:'+options.port);
+	pg.connect(POSTGRES.CONNECTION_STRING, function(err, client, done) {
+		if (err) { console.log("err pg.connect", err); }
+		//console.log("client pg.connect", client);
+		if (!err && client) {
+			//count users
+			client.query(POSTGRES.select, function(err, result) {
+				var data ={};
+				if (err) { console.log("err client", err); }
+				if (result) { if (result.rows[0]) { data = JSON.parse(result.rows[0].data); } }
+				initData(data);
+				app.listen(options.port);
+				console.log("the-duel started: http://localhost:"+options.port+"/");
+				done();
+			});
+		}
+	});

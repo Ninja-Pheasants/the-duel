@@ -13,6 +13,7 @@
 		"ejs": "0.8.x",
 		"optimist": "*",
 		"underscore": "*",
-		"dateformat": "*"
+		"dateformat": "*",
+		"pg": "*"
 	}
 }
