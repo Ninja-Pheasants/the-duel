@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>The Duel - Grasso vs Travaglio</title>
+  <title>The Duel - <%= process.env.CANDIDATO_A %> vs <%= process.env.CANDIDATO_B %></title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- Le styles -->
@@ -40,7 +40,7 @@
 
    <header class="text-center jumbotron">
     <h1 class="lead muted text-left">THE <i class="icon-exchange icon-white"></i> DUEL</h1>
-    <h2>Marco Travaglio vs Pietro Grasso</h2>
+    <h2>Marco <%= process.env.CANDIDATO_A %> vs Pietro <%= process.env.CANDIDATO_B %></h2>
     <div class="lead">
      <% if(DUEL_IS_OPEN) { %>
      <p>
@@ -57,8 +57,8 @@
     <hr />
     <form action="/voto-giurato" method="post">
       Voto giurato:<br />
-      votaA: <input type="radio" name="candidato" value="a" />
-      votaB: <input type="radio" name="candidato" value="b" />
+      vota <%= process.env.CANDIDATO_A %>: <input type="radio" name="candidato" value="a" />
+      vota <%= process.env.CANDIDATO_A %>: <input type="radio" name="candidato" value="b" />
       <br />
       messaggio:
       <textarea name="messaggio"></textarea>
@@ -122,12 +122,12 @@
     <% var percentualeA = ((VOTI.pubblico.a*100)/(VOTI.pubblico.a+VOTI.pubblico.b)).toFixed(2); %>
     <% var percentualeB = ((VOTI.pubblico.b*100)/(VOTI.pubblico.a+VOTI.pubblico.b)).toFixed(2); %>
     <div class="bar bar-warning text-right" style="width: <%= percentualeA %>%;">
-     Travaglio <%= percentualeA %>%
+     <%= process.env.CANDIDATO_A %> <%= percentualeA %>%
      <img src="travaglio.jpg" />
    </div>
    <div class="bar bar-danger text-left" style="width: <%= percentualeB %>%;">
      <img src="grasso.jpg" />
-     <%= percentualeB %>% Grasso
+     <%= percentualeB %>% <%= process.env.CANDIDATO_B %>
    </div>
  </div>
  <% if (DUEL_IS_OPEN && !session.messaggio) { %>
@@ -137,7 +137,7 @@
 
 <p class="margin-medium-bottom text-center">
   <small>
-    Dettaglio Voti: <strong>Travaglio</strong> <%= VOTI.pubblico.a+VOTI.giuria.a %> (giuria: <%= VOTI.giuria.a %>) - <strong>Grasso</strong> <%= VOTI.pubblico.b+VOTI.giuria.b %> (giuria: <%= VOTI.giuria.b %>)
+    Dettaglio Voti: <strong><%= process.env.CANDIDATO_A %></strong> <%= VOTI.pubblico.a+VOTI.giuria.a %> (giuria: <%= VOTI.giuria.a %>) - <strong><%= process.env.CANDIDATO_B %></strong> <%= VOTI.pubblico.b+VOTI.giuria.b %> (giuria: <%= VOTI.giuria.b %>)
   </small>
 </p>
 
