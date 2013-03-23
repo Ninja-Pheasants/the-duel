@@ -40,7 +40,7 @@
 
    <header class="text-center jumbotron">
     <h1 class="lead muted text-left">THE <i class="icon-exchange icon-white"></i> DUEL</h1>
-    <h2>Marco <%= CANDIDATI.a %> vs Pietro <%= CANDIDATI.b %></h2>
+    <h2>Marco <%= CANDIDATI.a %> <i class="icon-pencil"></i> <span class="muted">·</span> <i class="icon-legal"></i> Pietro <%= CANDIDATI.b %></h2>
     <div class="lead">
      <% if(DUEL_IS_OPEN) { %>
      <p>
@@ -115,7 +115,7 @@
 
 <div role="main" id="voti" class="row-fluid">
   <% if (DUEL_IS_OPEN && !session.messaggio) { %>
-  <a href="/votaA" class="btn btn-inverse span1 vota">vota&nbsp;<i class="icon-pencil"></i></a>
+  <a href="/votaA" class="btn btn-inverse span1 vota">vota <i class="icon-pencil"></i></a>
   <% } %>
   <div class="progress span10 margin-medium-vertical<% if (session.messaggio) { %> offset1<% } %>">
 	<%
@@ -131,16 +131,16 @@
 		if (percentualeB==1) { percentualeB = 2; percentualeA = 98; }
 	%>
     <div class="bar bar-warning text-right" style="width: <%= percentualeA %>%;">
-     <%= CANDIDATI.a %> <%= percentualeA %>%
+     <span class="bar-candidato"><%= CANDIDATI.a %> <%= percentualeA %>%</span>
      <img src="travaglio.jpg" />
    </div>
    <div class="bar bar-danger text-left" style="width: <%= percentualeB %>%;">
      <img src="grasso.jpg" />
-     <%= percentualeB %>% <%= CANDIDATI.b %>
+     <span class="bar-candidato"><%= percentualeB %>% <%= CANDIDATI.b %></span>
    </div>
  </div>
  <% if (DUEL_IS_OPEN && !session.messaggio) { %>
- <a href="/votaB" class="btn btn-inverse span1 vota pull-right"><i class="icon-legal"></i>&nbsp;vota</a>
+ <a href="/votaB" class="btn btn-inverse span1 vota pull-right"><i class="icon-legal"></i> vota</a>
  <% } %>
 </div>
 
@@ -150,7 +150,7 @@
   </small>
 </p>
 
-<div class="well">
+<div class="well margin-medium-vertical">
   <h4>I voti della Giuria</h4>
   <ul class="unstyled">
 <%

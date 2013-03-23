@@ -41,3 +41,64 @@
 .margin-medium-bottom {
   margin-bottom: 10px;
 }
+
+@media (max-width:768px) {
+
+  #voti .vota {
+    margin-top: 0;
+  }
+
+}
+
+@media (max-width:979px) {
+
+  #voti .progress {
+    line-height: 1.2;
+  }
+
+  #voti .progress .bar {
+    position: relative;
+    font-size: 16px;
+  }
+
+  #voti .progress img {
+    position: absolute;
+    top: 10px;
+    height: 50px;
+    vertical-align: top;
+  }
+
+  #voti .bar-candidato {
+    position: absolute;
+    top: 70px; /* (height img + 20px) */
+  }
+
+  #voti .progress .bar.text-left {
+    padding-left: 0;
+  }
+
+  #voti .progress .bar.text-right {
+    padding-right: 0;
+  }
+
+  #voti .progress .bar.text-left img {
+    left: 10px;
+  }
+
+  #voti .progress .bar.text-right img {
+    right: 10px;
+  }
+
+  #voti .progress .bar.text-left .bar-candidato {
+    left: 10px;
+  }
+
+  #voti .progress .bar.text-right .bar-candidato {
+    right: 10px;
+  }
+
+  div[role="main"] {
+    margin: 20px 0;
+  }
+
+}
