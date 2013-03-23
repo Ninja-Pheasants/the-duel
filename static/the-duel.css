@@ -27,7 +27,7 @@
   font-family: "Oswald", Arial, sans-serif;
   height: 70px;
   line-height: 1.5;
-  margin-top: 20px; /* ( height .progress - height .vota ) / 2 */
+  margin-top: 40px; /* ( (height .progress - height .vota) / 2 ) + 20px di margin-top di .progress*/
 }
 
 .margin-medium-vertical {
