@@ -147,19 +147,22 @@
   </small>
 </p>
 
-<%	
-	var messaggiGiuria = VOTI.messaggiGiuria.slice(-5); //gli ultimi 5
-	messaggiGiuria = messaggiGiuria.reverse();
-	_.each(messaggiGiuria, function(item, index) { %>
-<p>
-  <%= dateformat(item.data, 'shortTime') %>, <!-- dateformat https://npmjs.org/package/dateformat -->
-  <%= CANDIDATI[item.candidato] %>
-  &#32;
-  +<%= item.voto %>,
-  &#32;
-  <%= item.messaggio %>
-</p>
+<div class="well">
+  <h4>I voti della Giuria</h4>
+  <ul class="unstyled">
+<%
+  var messaggiGiuria = VOTI.messaggiGiuria.slice(-5); //gli ultimi 5
+  messaggiGiuria = messaggiGiuria.reverse();
+  _.each(messaggiGiuria, function(item, index) { %>
+    <li>
+      <p>
+        <span class="label label-inverse span1"><%= dateformat(item.data, 'shortTime') %></span> <!-- dateformat https://npmjs.org/package/dateformat -->
+        <%= CANDIDATI[item.candidato] %> (+<%= item.voto %>) · <em><%= item.messaggio %></em>
+      </p>
+    </li>
 <% }); %>
+  </ul>
+</div>
 
 <hr >
 
