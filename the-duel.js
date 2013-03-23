@@ -186,7 +186,7 @@
 
 	app.get('/reset', auth, login, function (req, res) {
 		VOTI = {
-			aperto: DUEL_IS_OPEN,
+			aperto: false,
 			giuria: { a: 0, b: 0 },
 			pubblico: { a: 0, b: 0 },
 			messaggiGiuria: []
