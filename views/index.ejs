@@ -119,8 +119,14 @@
   <a href="/votaA" class="btn btn-inverse span1 vota">vota&nbsp;<i class="icon-pencil"></i></a>
   <% } %>
   <div class="progress span10 margin-medium-vertical<% if (session.messaggio) { %> offset1<% } %>">
-    <% var percentualeA = ((VOTI.pubblico.a*100)/(VOTI.pubblico.a+VOTI.pubblico.b)).toFixed(2); %>
-    <% var percentualeB = ((VOTI.pubblico.b*100)/(VOTI.pubblico.a+VOTI.pubblico.b)).toFixed(2); %>
+    <% var votiTotA = VOTI.pubblico.a+VOTI.giuria.a %>
+    <% var votiTotB = VOTI.pubblico.b+VOTI.giuria.b %>
+    <% var percentualeA = ((votiTotA*100)/(votiTotA+votiTotB)).toFixed(2); %>
+    <% var percentualeB = ((votiTotB*100)/(votiTotA+votiTotB)).toFixed(2); %>
+    <% if ( (votiTotA+votiTotB) == 0 ) { %>
+    <%   percentualeA = 50 %>
+    <%   percentualeB = 50 %>
+    <% } %>
     <div class="bar bar-warning text-right" style="width: <%= percentualeA %>%;">
      <%= process.env.CANDIDATO_A %> <%= percentualeA %>%
      <img src="travaglio.jpg" />
@@ -137,7 +143,7 @@
 
 <p class="margin-medium-bottom text-center">
   <small>
-    Dettaglio Voti: <strong><%= process.env.CANDIDATO_A %></strong> <%= VOTI.pubblico.a+VOTI.giuria.a %> (giuria: <%= VOTI.giuria.a %>) - <strong><%= process.env.CANDIDATO_B %></strong> <%= VOTI.pubblico.b+VOTI.giuria.b %> (giuria: <%= VOTI.giuria.b %>)
+    Dettaglio Voti: <strong><%= process.env.CANDIDATO_A %></strong> <%= votiTotA %> (giuria: <%= VOTI.giuria.a %>) - <strong><%= process.env.CANDIDATO_B %></strong> <%= votiTotB %> (giuria: <%= VOTI.giuria.b %>)
   </small>
 </p>
 
