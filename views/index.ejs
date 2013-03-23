@@ -160,7 +160,7 @@
     <li>
       <p>
         <span class="label label-inverse span1"><%= dateformat(item.data, 'shortTime') %></span> <!-- dateformat https://npmjs.org/package/dateformat -->
-        <%= CANDIDATI[item.candidato] %> (+<%= item.voto %>) · <em><%= item.messaggio %></em>
+        (+<%= item.voto %>) <%= CANDIDATI[item.candidato] %> · <em><%= item.messaggio %></em>
       </p>
     </li>
 <% }); %>
