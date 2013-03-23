@@ -1,1 +1,0 @@
-{"aperto":true,"giuria":{"a":8,"b":0},"pubblico":{"a":1,"b":1},"messaggiGiuria":[{"data":"2013-03-23T10:18:04.687Z","voto":"4","candidato":"a","messaggio":"mess"},{"data":"2013-03-23T10:24:33.480Z","voto":"8","candidato":"b","messaggio":"wewew"},{"data":"2013-03-23T10:25:44.131Z","voto":"8","candidato":"a","messaggio":"wewewewew"}]}

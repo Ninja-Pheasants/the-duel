@@ -4,6 +4,7 @@
 	var ejs = require('ejs');
 	var _ = underscore = require('underscore');
 	var fs = require('fs');
+	var dateformat = require('dateformat');
 
 
 //command line parameters
@@ -102,7 +103,8 @@
 			messaggio: null,
 			risultati: null,
 			DUEL_IS_OPEN: DUEL_IS_OPEN,
-			VOTI: VOTI
+			VOTI: VOTI,
+			dateformat: dateformat
 		});
 	});
 
@@ -113,7 +115,8 @@
 			messaggio: vota('a'),
 			risultati: null,
 			DUEL_IS_OPEN: DUEL_IS_OPEN,
-			VOTI: VOTI
+			VOTI: VOTI,
+			dateformat: dateformat
 		});
 	});
 
@@ -124,7 +127,8 @@
 			messaggio: vota('b'),
 			risultati: null,
 			DUEL_IS_OPEN: DUEL_IS_OPEN,
-			VOTI: VOTI
+			VOTI: VOTI,
+			dateformat: dateformat
 		});
 	});
 	
@@ -149,7 +153,8 @@
 			messaggio: vota('b'),
 			risultati: null,
 			DUEL_IS_OPEN: DUEL_IS_OPEN,
-			VOTI: VOTI
+			VOTI: VOTI,
+			dateformat: dateformat
 		});
 	});
 

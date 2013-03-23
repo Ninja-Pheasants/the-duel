@@ -12,6 +12,7 @@
 		"express": "3.0.x",
 		"ejs": "0.8.x",
 		"optimist": "*",
-		"underscore": "*"
+		"underscore": "*",
+		"dateformat": "*"
 	}
 }
