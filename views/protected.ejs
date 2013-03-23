@@ -1,5 +1,32 @@
 <html>
 	<body>
-		<p>Questa pagina è raggiungibile solo previa auenticazione.</p>
+		<form action="/voto-giurato" method="post">
+			
+			votaA: <input type="radio" name="candidato" value="a" />
+			votaB: <input type="radio" name="candidato" value="b" />
+
+			<br />
+
+			messaggio: 
+			<textarea name="messaggio"></textarea>
+			
+			<br />
+			
+			voto:
+			<select name="voto">
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+				<option value="6">6</option>
+				<option value="7">7</option>
+				<option value="8">8</option>
+				<option value="9">9</option>
+				<option value="10">10</option>
+			</select>
+			<input type="submit" />
+		</form>
+
 	</body>
 </html>

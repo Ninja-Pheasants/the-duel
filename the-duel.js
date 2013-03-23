@@ -22,6 +22,7 @@
 		app.set('view engine', 'ejs');
 		app.set("view options", {layout: false});
 		app.engine('html', require('ejs').renderFile);
+		app.use(express.bodyParser());
 		app.use(express.cookieParser('this is a very long hash. Please forget it! ok? :E'));
 		app.use(express.session({
 			key: 'the-duel',
@@ -42,6 +43,9 @@
 		aperto: DUEL_IS_OPEN,
 		giuria: { a: 0, b: 0 },
 		pubblico: { a: 0, b: 0 },
+		messaggiGiuria: [
+
+		]
 	};
 	//provo a leggere il file dei dati salvati
 	try { VOTI = JSON.parse(fs.readFileSync(FILE_VOTI)); }
@@ -56,11 +60,12 @@
 
 
 //utility
-	var vota = function(candidato, giuria) {
+	var vota = function(candidato, giuria, voto) {
 		if (!DUEL_IS_OPEN) return LABEL_DUELLO_CHIUSO;
 		var messaggio = 'Hai votato: ';
 		if(giuria==true && candidato) {
-			VOTI.giuria[candidato] = VOTI.giuria[candidato] +1;
+			if (voto) { voto = new Number(voto) } else { voto = 1; }
+			VOTI.giuria[candidato] = VOTI.giuria[candidato] + voto;
 		}
 		else {
 			VOTI.pubblico[candidato] = VOTI.pubblico[candidato] +1;
@@ -148,6 +153,19 @@
 		});
 	});
 
+	app.post('/voto-giurato', auth, login, function (req, res) {
+		if(req.body.candidato && req.body.voto) {
+			vota(req.body.candidato, true, req.body.voto);
+			VOTI.messaggiGiuria.push({
+				data: new Date(), 
+				voto: req.body.voto||1, 
+				candidato: req.body.candidato,
+				messaggio: req.body.messaggio
+			});
+		}
+		res.redirect('/');
+	});
+
 	app.get('/login', auth, login, function (req, res) {
 		res.redirect('/');
 	});
@@ -155,6 +173,7 @@
 	app.all('/logout', logout, function (req, res) {
 		res.redirect('/');
 	});
+
 
 //start
 	app.listen(options.port);
