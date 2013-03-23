@@ -153,9 +153,9 @@
 	_.each(messaggiGiuria, function(item, index) { %>
 <p>
   <%= dateformat(item.data, 'shortTime') %>, <!-- dateformat https://npmjs.org/package/dateformat -->
-  <%= item.candidato %>
+  <%= CANDIDATI[item.candidato] %>
   &#32;
-  <%= item.voto %>,
+  +<%= item.voto %>,
   &#32;
   <%= item.messaggio %>
 </p>
