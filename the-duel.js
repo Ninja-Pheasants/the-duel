@@ -36,7 +36,7 @@
 //costanti
 	var LABEL_DUELLO_CHIUSO = 'Il duello è chiuso.';
 	var DUEL_IS_OPEN = false;
-	var FILE_VOTI = "VOTI-data.txt";
+	var FILE_VOTI = ".profile.d/VOTI-data.txt";
 
 
 //inizializzo di dati
@@ -64,7 +64,6 @@
 
 
 //utility
-	
 	var detectmobilebrowser = function(UAstring) {
 		var UAstring = UAstring.toLowerCase();
 		return (
