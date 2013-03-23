@@ -41,7 +41,7 @@
 	var FILE_VOTI = "./.profile.d/VOTI-data.txt";
 	var CANDIDATI = {
 		a: process.env.CANDIDATO_A||'Travaglio',
-		b: process.env.CANDIDATO_A||'Grasso'
+		b: process.env.CANDIDATO_B||'Grasso'
 	}
 	var POSTGRES =  {
 		CONNECTION_STRING: "postgres://" + process.env.THEDUEL_PG_USER +":"+ process.env.THEDUEL_PG_PASS + "@" + process.env.THEDUEL_PG_HOST +":"+ process.env.THEDUEL_PG_PORT + "/"+process.env.THEDUEL_PG_DB,
