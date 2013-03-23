@@ -99,8 +99,8 @@
 
 		<hr >
 
-		<% if (messaggio) { %>
-			<%= messaggio %>
+		<% if (session.messaggio) { %>
+			<%= session.messaggio %>
 		<% } else {  %>	
 			<% if (DUEL_IS_OPEN) { %>
 				<a href="/votaA">votaA</a>

@@ -141,16 +141,17 @@
 //routing
 	app.get('/', function(req, res) {
 		res.render('index', defaultLocals(req));
+		req.session.messaggio = null;
 	});
 
 	app.get('/votaA', function(req, res) {
-		var messaggioVoto = vota('a');
-		res.render('index', defaultLocals(req, messaggioVoto));
+		req.session.messaggio = vota('a');
+		res.redirect("/");
 	});
 
 	app.get('/votaB', function(req, res) {
-		var messaggioVoto = vota('b');
-		res.render('index', defaultLocals(req, messaggioVoto));
+		req.session.messaggio = vota('b');
+		res.redirect("/");
 	});
 	
 	app.get('/risultati', function(req, res) {
