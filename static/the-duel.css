@@ -65,6 +65,14 @@
     margin-top: 50px;
   }
 
+  div[role="main"] {
+    margin: 20px 0 0 0;
+  }
+
+}
+
+@media (max-width:979px) {
+
   #voti .progress {
     line-height: 1.2;
   }
@@ -110,8 +118,5 @@
     right: 10px;
   }
 
-  div[role="main"] {
-    margin: 20px 0 0 0;
-  }
 
 }
