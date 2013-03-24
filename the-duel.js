@@ -54,7 +54,7 @@
 
 //funzione di controllo per autenticazione
 	var auth = express.basicAuth(function(user, pass, callback) {
-		var result = (user === (process.env.THEDUEL_USERNAME||'user') && pass === (process.env.THEDUEL_PASSWORD||'pass'));
+		var result = (user === (process.env.THEDUEL_USER||'user') && pass === (process.env.THEDUEL_PASS||'pass'));
 		callback(null /* error */, result);
 	});
 
@@ -101,11 +101,11 @@
 	};
 
 	var login = function(req, res, callback) { //mette in sessione l'utente
-		req.session.user = process.env.THEDUEL_USERNAME||'user';
+		req.session.user = process.env.THEDUEL_USER||'user';
 		callback();
 	};
 
-	var logout = function(req, res, callback) { //mette in sessione l'utente
+	var logout = func(req, res, callback) { //mette in sessione l'utente
 		if (req.session.user) { delete req.session.user; }
 		callback();
 	};
