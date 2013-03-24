@@ -201,17 +201,9 @@
     <li class="pull-left">
       <a href="/disclaimer.html">Chiarimenti importanti</a>
     </li>
-    <li class="pull-left">
+    <li class="pull-right">
       <a href="/risultati">Risultati JSON</a>
     </li>
-    <li class="pull-right">
-     <!-- If NON sono loggato da giurato -->
-     <% if (!session.user) { %>
-     <a href="/login">Login Giuria</a>
-     <% } else { %>
-     <a href="/logout">Logout</a>
-     <% } %>
-   </li>
   </ul>
 
 <!--
