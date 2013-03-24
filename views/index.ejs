@@ -143,11 +143,11 @@
 			percentualeB=100-percentualeA;
 		}
 	%>
-    <div class="bar bar-warning text-right" style="width: <%= percentualeA %>%;">
+    <div class="bar bar-warning text-right" style="width: <%= percentualeA-1 %>%;">
      <span class="bar-candidato"><%= CANDIDATI.a %> <%= percentualeA %>%</span>
      <img src="travaglio.jpg" />
    </div>
-   <div class="bar bar-danger text-left" style="width: <%= percentualeB %>%;">
+   <div class="bar bar-danger text-left" style="width: <%= percentualeB-1 %>%;">
      <img src="grasso.jpg" />
      <span class="bar-candidato"><%= percentualeB %>% <%= CANDIDATI.b %></span>
    </div>
