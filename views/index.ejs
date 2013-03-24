@@ -125,18 +125,23 @@
 		var votiTotA = VOTI.pubblico.a+VOTI.giuria.a;
 		var votiTotB = VOTI.pubblico.b+VOTI.giuria.b;
 		var percentualeA = Math.round( (votiTotA*100) / (votiTotA+votiTotB) );
-     	var percentualeB = Math.round( (votiTotB*100) / (votiTotA+votiTotB) );
+     	var percentualeB = 100-percentualeA;
 		if ( (votiTotA+votiTotB) == 0 ) {
 			percentualeA = 50;
 			percentualeB = 50;
 		}
-		if ( (percentualeA+percentualeB) > 100) {
-			var differenza = ( (percentualeA+percentualeB)-100 ) / 2;
-			percentualeA = percentualeA-differenza;
-			percentualeB = percentualeB-differenza;
-		}
 		if (percentualeA==1) { percentualeA = 2; percentualeB = 98; }
 		if (percentualeB==1) { percentualeB = 2; percentualeA = 98; }
+		if (percentualeA%2==1) {
+			if (percentualeA>50) {
+				percentualeA=percentualeA-1;
+			}
+			else {
+				percentualeA=percentualeA+1;
+
+			}
+			percentualeB=100-percentualeA;
+		}
 	%>
     <div class="bar bar-warning text-right" style="width: <%= percentualeA %>%;">
      <span class="bar-candidato"><%= CANDIDATI.a %> <%= percentualeA %>%</span>
