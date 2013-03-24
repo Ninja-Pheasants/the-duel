@@ -46,11 +46,23 @@
 
   #voti .vota {
     margin-top: 0;
+    font-size: 20px;
+    height: 50px;
+    line-height: 50px;
+  }
+
+  div[role="main"] {
+    margin: 20px 0;
   }
 
 }
 
-@media (max-width:979px) {
+@media (min-width:769px) and (max-width:979px) {
+
+  #voti .vota {
+    font-size: 11px;
+    height: 50px;
+  }
 
   #voti .progress {
     line-height: 1.2;
@@ -98,7 +110,7 @@
   }
 
   div[role="main"] {
-    margin: 20px 0;
+    margin: 20px 0 0 0;
   }
 
 }
