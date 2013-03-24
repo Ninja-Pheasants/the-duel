@@ -82,7 +82,7 @@
 
    <% } else { %>
    <div class="alert">
-    <span class="label label-important"><i class="icon-lock"></i> In questo momento il duello è CHIUSO <i class="icon-lock"></i></span>
+    <span class="label label-important"><i class="icon-lock"></i> Al momento il duello è IN PAUSA <i class="icon-lock"></i></span>
     <p>
       Il gong del primo imperdibile round suonerà <strong>Lunedì 25 Marzo alle 21.10</strong> con l'inizio di Piazza Pulita su La7.<br />
       Pietro Grasso saprà approfittare del vantaggio iniziale? Vota e vedremo!
@@ -163,8 +163,10 @@
   </small>
 </p>
 
+
 <div class="well margin-medium-vertical">
   <h4 id="giuria">I voti della Giuria</h4>
+<% if (VOTI.messaggiGiuria.length>0) { %>
   <ul class="unstyled">
 <%
   //esiste il parametro "vedi-tutti-i-voti" allora non tronco l'array, altrimenti lo tronco alla fine di 5
@@ -191,7 +193,11 @@
   			<p><a href="/">Vedi pochi</a></p>	
   		<% } %>
   <% } %>
+<% } else { %>
+  <p>La Giuria non si è ancora espressa... ma non tarderà a farlo!</p>
+<% } %>
 </div>
+
 
 <hr >
 
