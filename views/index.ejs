@@ -126,16 +126,17 @@
 		var votiTotB = VOTI.pubblico.b+VOTI.giuria.b;
 		var percentualeA = Math.round( (votiTotA*100) / (votiTotA+votiTotB) );
      	var percentualeB = 100-percentualeA;
+
+     	if((votiTotA+votiTotB)==0) {
+     		percentualeA = 50;
+     		percentualeB = 50;
+     	}
 		
 		//calcolo per i <div>
-		
+
 		var percentualeA_div = percentualeA;
 		var percentualeB_div = percentualeB;
 
-		if ( (votiTotA+votiTotB) == 0 ) {
-			percentualeA_div = 50;
-			percentualeB_div = 50;
-		}
 		if (percentualeA_div==1) { percentualeA_div = 2; percentualeB_div = 98; }
 		if (percentualeB_div==1) { percentualeB_div = 2; percentualeA_div = 98; }
 		
