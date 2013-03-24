@@ -120,7 +120,7 @@
   <% if (DUEL_IS_OPEN && !session.messaggio) { %>
   <a href="/votaA" class="btn btn-inverse span1 vota">vota <i class="icon-pencil"></i></a>
   <% } %>
-  <div class="progress span10 margin-medium-vertical<% if (session.messaggio) { %> offset1<% } %>">
+  <div class="progress span10 margin-medium-vertical<% if (!DUEL_IS_OPEN || session.messaggio) { %> offset1<% } %>">
 	<%
 		var votiTotA = VOTI.pubblico.a+VOTI.giuria.a;
 		var votiTotB = VOTI.pubblico.b+VOTI.giuria.b;
