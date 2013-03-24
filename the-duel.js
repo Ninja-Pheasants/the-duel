@@ -105,7 +105,7 @@
 		callback();
 	};
 
-	var logout = func(req, res, callback) { //mette in sessione l'utente
+	var logout = function(req, res, callback) { //mette in sessione l'utente
 		if (req.session.user) { delete req.session.user; }
 		callback();
 	};
