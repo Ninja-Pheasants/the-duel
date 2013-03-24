@@ -111,7 +111,7 @@
         Chi metterà a segno il prossimo colpo?
       </p>
     </div>
-    <p class="margin-medium-vertical"><a href="/" class="btn btn-inverse btn-large"><i class="icon-exchange"></i> Vota ancora!</a></p>
+    <p class="margin-medium-vertical"><a href="/" class="btn btn-inverse btn-large" id="vota-ancora"><i class="icon-exchange"></i> Vota ancora!</a></p>
   </div>
 </div>
 <% } %>
@@ -230,8 +230,8 @@
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <!--
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <!--
     <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
     -->
 
@@ -245,6 +245,11 @@
             ga('create', 'UA-39549771-1', 'ilduello.net');
             ga('send', 'pageview');
         }
+
+        // Using jQuery Event API v1.3
+        $('#vota-ancora').on('click touchstart', function() {
+          ga('send', 'event', 'Misc', 'Usa bottone', 'Vota ancora!');
+        });
     </script>
 
 </body>
