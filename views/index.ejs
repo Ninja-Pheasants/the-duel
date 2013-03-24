@@ -126,28 +126,38 @@
 		var votiTotB = VOTI.pubblico.b+VOTI.giuria.b;
 		var percentualeA = Math.round( (votiTotA*100) / (votiTotA+votiTotB) );
      	var percentualeB = 100-percentualeA;
+		
+		//calcolo per i <div>
+		
+		var percentualeA_div = percentualeA;
+		var percentualeB_div = percentualeB;
+
 		if ( (votiTotA+votiTotB) == 0 ) {
-			percentualeA = 50;
-			percentualeB = 50;
+			percentualeA_div = 50;
+			percentualeB_div = 50;
 		}
-		if (percentualeA==1) { percentualeA = 2; percentualeB = 98; }
-		if (percentualeB==1) { percentualeB = 2; percentualeA = 98; }
-		if (percentualeA%2==1) {
-			if (percentualeA>50) {
-				percentualeA=percentualeA-1;
+		if (percentualeA_div==1) { percentualeA_div = 2; percentualeB_div = 98; }
+		if (percentualeB_div==1) { percentualeB_div = 2; percentualeA_div = 98; }
+		
+		if (percentualeA_div==0) { percentualeA_div = 2; }
+		else if (percentualeB_div==0) { percentualeA_div = 98; }
+		
+		if (percentualeA_div%2==1) {
+			if (percentualeA_div>50) {
+				percentualeA_div=percentualeA_div-1;
 			}
 			else {
-				percentualeA=percentualeA+1;
+				percentualeA_div=percentualeA_div+1;
 
 			}
-			percentualeB=100-percentualeA;
 		}
+		percentualeB_div = 100-percentualeA_div	
 	%>
-    <div class="bar bar-warning text-right" style="width: <%= percentualeA==0?2:percentualeA %>%;">
+    <div class="bar bar-warning text-right" style="width: <%= percentualeA_div %>%;">
      <span class="bar-candidato"><%= CANDIDATI.a %> <%= percentualeA %>%</span>
      <img src="travaglio.jpg" />
    </div>
-   <div class="bar bar-danger text-left" style="width: <%= percentualeA==0?98:percentualeB %>%;">
+   <div class="bar bar-danger text-left" style="width: <%= percentualeB_div %>%;">
      <img src="grasso.jpg" />
      <span class="bar-candidato"><%= percentualeB %>% <%= CANDIDATI.b %></span>
    </div>
