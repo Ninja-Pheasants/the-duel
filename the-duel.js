@@ -181,12 +181,14 @@
 	app.post('/voto-giurato', auth, login, function (req, res) {
 		if(req.body.candidato && req.body.voto) {
 			vota(req.body.candidato, true, req.body.voto);
-			VOTI.messaggiGiuria.push({
-				data: new Date(), 
-				voto: req.body.voto||1, 
-				candidato: req.body.candidato,
-				messaggio: req.body.messaggio
-			});
+			if(req.body.messaggio) {
+				VOTI.messaggiGiuria.push({
+					data: new Date(), 
+					voto: req.body.voto||1, 
+					candidato: req.body.candidato,
+					messaggio: req.body.messaggio
+				});
+			}
 		}
 		res.redirect('/');
 	});
