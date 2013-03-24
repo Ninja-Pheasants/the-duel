@@ -117,7 +117,8 @@
 			session: req.session,
 			DUEL_IS_OPEN: DUEL_IS_OPEN,
 			VOTI: VOTI,
-			CANDIDATI: CANDIDATI
+			CANDIDATI: CANDIDATI,
+			queryString: req.query
 		};
 	};
 

@@ -151,11 +151,16 @@
 </p>
 
 <div class="well margin-medium-vertical">
-  <h4>I voti della Giuria</h4>
+  <h4 id="giuria">I voti della Giuria <%= VOTI.messaggiGiuria.length %></h4>
   <ul class="unstyled">
 <%
-  var messaggiGiuria = VOTI.messaggiGiuria.slice(-5); //gli ultimi 5
+  //esiste il parametro "vedi-tutti-i-voti" allora non tronco l'array, altrimenti lo tronco alla fine di 5
+  var quanti = (queryString['vedi-tutti-i-voti'] !== undefined) ? 0 : -5;
+  //tronco l'array
+  var messaggiGiuria = VOTI.messaggiGiuria.slice(quanti); //gli ultimi 5 oppure tutti
+  //rovescio l'array
   messaggiGiuria = messaggiGiuria.reverse();
+  //stampo per ciascuno l'html
   _.each(messaggiGiuria, function(item, index) { %>
     <li>
       <p>
@@ -165,6 +170,11 @@
     </li>
 <% }); %>
   </ul>
+  <% if (queryString['vedi-tutti-i-voti']===undefined) { %>
+  	<p><a href="/?vedi-tutti-i-voti#giuria">Vedi tutti</a></p>	
+  <% } else { %>
+  	<p><a href="/">Vedi pochi</a></p>	
+  <% } %>
 </div>
 
 <hr >
