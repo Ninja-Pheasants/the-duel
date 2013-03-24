@@ -38,7 +38,7 @@
 	var VOTI = {};
 	var LABEL_DUELLO_CHIUSO = 'Il duello è chiuso.';
 	var DUEL_IS_OPEN = false;
-	var FILE_VOTI = "./.profile.d/VOTI-data.txt";
+	//var FILE_VOTI = "./.profile.d/VOTI-data.txt";
 	var CANDIDATI = {
 		a: process.env.CANDIDATO_A||'Travaglio',
 		b: process.env.CANDIDATO_B||'Grasso'
@@ -74,7 +74,9 @@
 			VOTI = _.extend(VOTI, data);
 			DUEL_IS_OPEN = VOTI.aperto;
 		}
-		catch (e) { console.log("File dei voti", FILE_VOTI, "non trovato"); }
+		catch (e) { 
+			//console.log("File dei voti", FILE_VOTI, "non trovato"); 
+		}
 	};
 	var detectmobilebrowser = function(UAstring) {
 		var UAstring = UAstring.toLowerCase();
