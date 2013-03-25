@@ -8,4 +8,4 @@ WITH (
 );
 
 -- init data with one row... I know it's stupid but that's life.
-INSERT into "the-duel" (data) values ('');
+INSERT into "the-duel" (data) values (null);
