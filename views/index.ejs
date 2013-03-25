@@ -56,26 +56,34 @@
 
     <hr />
     <form action="/voto-giurato" method="post">
-      Voto giurato:<br />
-      vota <%= CANDIDATI.a %>: <input type="radio" name="candidato" value="a" />
-      vota <%= CANDIDATI.b %>: <input type="radio" name="candidato" value="b" />
-      <br />
-      messaggio:
-      <textarea name="messaggio"></textarea>
-      <br />
-      voto:
-      <select name="voto">
-       <option value="1">1</option>
-       <option value="2">2</option>
-       <option value="3">3</option>
-       <option value="4">4</option>
-       <option value="5">5</option>
-       <option value="6">6</option>
-       <option value="7">7</option>
-       <option value="8">8</option>
-       <option value="9">9</option>
-     </select>
-     <input type="submit" />
+      <h2>Voto giurato</h2>
+      <p>
+		<label for="votaVotaA"><%= CANDIDATI.a %> <input id="votaVotaA" type="radio" name="candidato" value="a" /></label>
+		<label for="votaVotaB"><%= CANDIDATI.b %> <input id="votaVotaB" type="radio" name="candidato" value="b" /></label>
+      </p>
+      <p>
+      	<textarea cols="10" rows="2" name="messaggio" placeholder="messaggio (max 100char)" ></textarea>
+      </p>
+      <p>
+      	<label for="votaVoto">
+      	  Voto: 
+	      <select name="voto">
+	       <option value="1">1</option>
+	       <option value="2">2</option>
+	       <option value="3">3</option>
+	       <option value="4">4</option>
+	       <option value="5">5</option>
+	       <option value="6">6</option>
+	       <option value="7">7</option>
+	       <option value="8">8</option>
+	       <option value="9">9</option>
+	     </select>
+	    </label>
+   		<input type="submit" class="btn" />
+	   </p>
+       <p>
+       	<small>(attenzione è collegato con <a href="https://twitter.com/NinjaPheasants">twitter@NinjaPheasants)</a></small>
+       </p>
    </form>
    <% } %>
    <!--// If sono loggato da giurato -->

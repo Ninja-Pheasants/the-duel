@@ -6,6 +6,7 @@
 	var fs = require('fs');
 	var dateformat = require('dateformat');
 	var pg = require('pg');
+	var twitterAPI = require('node-twitter-api');
 
 
 //command line parameters
@@ -49,8 +50,14 @@
 		select: 'SELECT  * from "the-duel" limit 1',
 		truncate: 'DELETE from "the-duel"'
 	};
+	var twitter = new twitterAPI({
+		consumerKey: process.env.THEDUEL_TW_consumerKey||'null',
+		consumerSecret: process.env.THEDUEL_TW_consumerSecret||'null',
+		callback: process.env.THEDUEL_TW_callback||'null'
+	});
 
-
+	var TWITTER_ACCESS_TOKEN = process.env.THEDUEL_TW_accessToken||'null';
+	var TWITTER_ACCESS_TOKEN_SECRET = process.env.THEDUEL_TW_accessTokenSecret||'null';
 
 //funzione di controllo per autenticazione
 	var auth = express.basicAuth(function(user, pass, callback) {
@@ -184,11 +191,18 @@
 		if(req.body.candidato && req.body.voto) {
 			vota(req.body.candidato, true, req.body.voto);
 			if(req.body.messaggio) {
+				var voto = req.body.voto||1;
+				var candidato = req.body.candidato;
+				var messaggio = req.body.messaggio;
 				VOTI.messaggiGiuria.push({
 					data: new Date(), 
-					voto: req.body.voto||1, 
-					candidato: req.body.candidato,
-					messaggio: req.body.messaggio
+					voto: voto, 
+					candidato: candidato,
+					messaggio: messaggio
+				});
+				var twitterStatus = "+" +voto+ " " +CANDIDATI[candidato]+ ": " + messaggio;
+ 				twitter.statuses('update', {status: twitterStatus}, TWITTER_ACCESS_TOKEN, TWITTER_ACCESS_TOKEN_SECRET, function(err, data, resp){
+					//hoping no error!
 				});
 			}
 		}
