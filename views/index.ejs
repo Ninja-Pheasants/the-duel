@@ -55,35 +55,60 @@
     </p>
 
     <hr />
-    <form action="/voto-giurato" method="post">
-      <h2>Voto giurato</h2>
-      <p>
-		<label for="votaVotaA"><%= CANDIDATI.a %> <input id="votaVotaA" type="radio" name="candidato" value="a" /></label>
-		<label for="votaVotaB"><%= CANDIDATI.b %> <input id="votaVotaB" type="radio" name="candidato" value="b" /></label>
-      </p>
-      <p>
-      	<textarea cols="10" rows="2" name="messaggio" placeholder="messaggio (max 100char)" ></textarea>
-      </p>
-      <p>
-      	<label for="votaVoto">
-      	  Voto: 
-	      <select name="voto">
-	       <option value="1">1</option>
-	       <option value="2">2</option>
-	       <option value="3">3</option>
-	       <option value="4">4</option>
-	       <option value="5">5</option>
-	       <option value="6">6</option>
-	       <option value="7">7</option>
-	       <option value="8">8</option>
-	       <option value="9">9</option>
-	     </select>
-	    </label>
-   		<input type="submit" class="btn" />
-	   </p>
-       <p>
-       	<small>(attenzione è collegato con <a href="https://twitter.com/NinjaPheasants">twitter@NinjaPheasants)</a></small>
-       </p>
+    <form class="form-horizontal text-left" action="/voto-giurato" method="post">
+      <fieldset><legend>Voto giurato</legend>
+		<div class="control-group">
+			<label class="control-label">Candidato</label>
+			<div class="controls">
+				<label class="radio" for="votaVotaA">
+					<%= CANDIDATI.a %> <input id="votaVotaA" type="radio" name="candidato" value="a" />
+				</label>
+				<label class="radio" for="votaVotaB">
+					<%= CANDIDATI.b %> <input id="votaVotaB" type="radio" name="candidato" value="b" />
+				</label>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label" for="votaVoto">
+				Voto
+			</label>
+			<div class="controls">
+		      <select name="voto">
+			       <option value="1">1</option>
+			       <option value="2">2</option>
+			       <option value="3">3</option>
+			       <option value="4">4</option>
+			       <option value="5">5</option>
+			       <option value="6">6</option>
+			       <option value="7">7</option>
+			       <option value="8">8</option>
+			       <option value="9">9</option>
+		     	</select>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label" for="votaMessaggio">Commento</label>
+			<div class="controls">
+      			<textarea cols="6" id="votaMessaggio" rows="3" maxlength="100" name="messaggio" placeholder="messaggio (max 100char)" > #piazzapulita www.ilduello.net</textarea>
+      			<small id="rimanenti"></small>
+				<script>
+						var calcolaRimanenti = function() {
+							document.getElementById('rimanenti').innerText = 100 - document.getElementById('votaMessaggio').value.length;
+						};
+						document.getElementById('votaMessaggio').onkeydown = calcolaRimanenti;
+						document.getElementById('votaMessaggio').onkeyup = calcolaRimanenti;
+						document.getElementById('votaMessaggio').onchange = calcolaRimanenti;
+						calcolaRimanenti();
+				</script>
+			</div>
+		</div>
+		<div class="control-group">
+			<div class="controls">
+				<input type="submit" class="btn" />
+       			<small>(attenzione è collegato con <a href="https://twitter.com/NinjaPheasants">twitter@NinjaPheasants)</a></small>
+			</div>
+		</div>
+      </fieldset>
    </form>
    <% } %>
    <!--// If sono loggato da giurato -->
