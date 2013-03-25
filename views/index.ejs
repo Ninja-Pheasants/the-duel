@@ -245,7 +245,10 @@
   _.each(messaggiGiuria, function(item, index) { %>
     <li>
       <p>
-        <% var data = (new Number(dateformat(item.data, 'HH'))+1) + ":" + dateformat(item.data, 'mm')  %>
+        <% var data = new Date(item.data) ; 
+        var hh = (data.getHours()+1); hh = hh > 9 ? hh : "0"+hh; 
+        var mm = (data.getMinutes()) ; mm = mm > 9 ? mm : "0"+mm;
+        data = hh+":"+mm; %>
         <span class="label label-inverse span1"><%= data %></span> <!-- dateformat https://npmjs.org/package/dateformat -->
         (+<%= item.voto %>) <%= CANDIDATI[item.candidato] %> · <em><%= item.messaggio %></em>
       </p>
