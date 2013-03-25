@@ -183,10 +183,6 @@
 		res.redirect("/");
 	});
 
-	app.get('/protected', auth, login, function (req, res) {
-		res.render('index', defaultLocals(req, messaggioVoto));
-	});
-
 	app.post('/voto-giurato', auth, login, function (req, res) {
 		if(req.body.candidato && req.body.voto) {
 			vota(req.body.candidato, true, req.body.voto);
