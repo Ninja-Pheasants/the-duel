@@ -194,13 +194,16 @@
 				var voto = req.body.voto||1;
 				var candidato = req.body.candidato;
 				var messaggio = req.body.messaggio;
+				var hashtag = req.body.hashtag||'';
 				VOTI.messaggiGiuria.push({
 					data: new Date(), 
 					voto: voto, 
 					candidato: candidato,
-					messaggio: messaggio
+					messaggio: messaggio,
+					hashtag: hashtag
 				});
-				var twitterStatus = "+" +voto+ " " +CANDIDATI[candidato]+ ": " + messaggio;
+				
+				var twitterStatus = "+" +voto+ " " +CANDIDATI[candidato]+ ": "+messaggio+" "+hashtag;
  				twitter.statuses('update', {status: twitterStatus}, TWITTER_ACCESS_TOKEN, TWITTER_ACCESS_TOKEN_SECRET, function(err, data, resp){
 					//hoping no error!
 				});

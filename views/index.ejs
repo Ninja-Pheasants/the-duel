@@ -89,15 +89,37 @@
 		<div class="control-group">
 			<label class="control-label" for="votaMessaggio">Commento</label>
 			<div class="controls">
-      			<textarea cols="6" id="votaMessaggio" rows="3" maxlength="100" name="messaggio" placeholder="messaggio (max 100char)" > #piazzapulita www.ilduello.net</textarea>
+				<%
+					var votoEsempio = "+1 ";
+					var hastagPredefinito = ' #piazzapulita www.ilduello.net';
+					var nomePiuLungo = (CANDIDATI.a.length>CANDIDATI.b.length ? CANDIDATI.a.length : CANDIDATI.b.length)+2;
+					var lunghezzaTweet = 140;
+					var lunghezzaMassimaMessaggio = lunghezzaTweet - votoEsempio.length - hastagPredefinito.length - nomePiuLungo;
+				%>
+
+      			<textarea cols="6" id="votaMessaggio" rows="3" maxlength="<%= lunghezzaMassimaMessaggio %>" name="messaggio" placeholder="messaggio" ></textarea>
       			<small id="rimanenti"></small>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label" for="hashtag">Hashtag</label>
+			<div class="controls">
+      			<textarea cols="6" id="votaHash" rows="3" maxlength="100" name="hashtag" placeholder="hashtag" ><%= hastagPredefinito %></textarea>
 				<script>
 						var calcolaRimanenti = function() {
-							document.getElementById('rimanenti').innerText = 100 - document.getElementById('votaMessaggio').value.length;
+							document.getElementById('rimanenti').innerText = 
+							<%= lunghezzaTweet %> - 
+							<%= votoEsempio.length %> - 
+							<%= nomePiuLungo %> - 
+							(document.getElementById('votaMessaggio').value.length) - 
+							(document.getElementById('votaHash').value.length);
 						};
 						document.getElementById('votaMessaggio').onkeydown = calcolaRimanenti;
 						document.getElementById('votaMessaggio').onkeyup = calcolaRimanenti;
 						document.getElementById('votaMessaggio').onchange = calcolaRimanenti;
+						document.getElementById('votaHash').onkeydown = calcolaRimanenti;
+						document.getElementById('votaHash').onkeyup = calcolaRimanenti;
+						document.getElementById('votaHash').onchange = calcolaRimanenti;
 						calcolaRimanenti();
 				</script>
 			</div>
