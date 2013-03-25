@@ -245,7 +245,8 @@
   _.each(messaggiGiuria, function(item, index) { %>
     <li>
       <p>
-        <span class="label label-inverse span1"><%= dateformat(item.data, 'shortTime') %></span> <!-- dateformat https://npmjs.org/package/dateformat -->
+        <% var data = (new Number(dateformat(item.data, 'HH'))+1) + ":" + dateformat(item.data, 'mm')  %>
+        <span class="label label-inverse span1"><%= data %></span> <!-- dateformat https://npmjs.org/package/dateformat -->
         (+<%= item.voto %>) <%= CANDIDATI[item.candidato] %> · <em><%= item.messaggio %></em>
       </p>
     </li>
