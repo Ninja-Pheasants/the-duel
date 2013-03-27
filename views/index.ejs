@@ -245,11 +245,30 @@
   _.each(messaggiGiuria, function(item, index) { %>
     <li>
       <p>
-        <% var data = new Date(item.data) ; 
-        var hh = (data.getHours()+1); hh = hh > 9 ? hh : "0"+hh; 
-        var mm = (data.getMinutes()) ; mm = mm > 9 ? mm : "0"+mm;
-        data = hh+":"+mm; %>
-        <span class="label label-inverse span1"><%= data %></span> <!-- dateformat https://npmjs.org/package/dateformat -->
+        <%
+			var MONTHS_ITA = {
+				0: 'Gennaio',
+				1: 'Febbraio',
+				2: 'Marzo',
+				3: 'Aprile',
+				4: 'Maggio',
+				5: 'Giugno',
+				6: 'Luglio',
+				7: 'Agosto',
+				8: 'Settembre',
+				9: 'Ottobre',
+				10: 'Novembre',
+				11: 'Dicembre'
+			};
+	        var data = new Date(item.data) ; 
+	        var hh = (data.getHours()+1); hh = hh > 9 ? hh : "0"+hh; 
+	        var mm = (data.getMinutes()) ; mm = mm > 9 ? mm : "0"+mm;
+	        var day = data.getDate(); day = ( day > 9 ? day : '0'+day);
+	        var month = MONTHS_ITA[data.getMonth()].substring(0,3);
+	        var time = hh +':'+ mm;
+	        var fullDate =  day +' '+ month + ', ' + time;
+        %>
+        <span class="label label-inverse span1" title="<%= fullDate %>"><%= time %></span> <!-- dateformat https://npmjs.org/package/dateformat -->
         (+<%= item.voto %>) <%= CANDIDATI[item.candidato] %> · <em><%= item.messaggio %></em>
       </p>
     </li>
