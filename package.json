@@ -2,19 +2,23 @@
 	"name": "the-duel",
 	"version": "0.0.1",
 	"engines": {
-		"node": "0.8.x",
-		"npm": "1.2.x"
+		"node": "10",
+		"npm": "6"
 	},
 	"scripts": {
+		"start": "node the-duel.js",
 		"web": "node the-duel.js"
 	},
 	"dependencies": {
-		"express": "3.0.x",
-		"ejs": "0.8.x",
-		"optimist": "*",
-		"underscore": "*",
+		"body-parser": "^1.18.3",
+		"cookie-parser": "^1.4.3",
 		"dateformat": "*",
+		"ejs": "2.6.x",
+		"express": "4.16.x",
+		"express-session": "^1.15.6",
+		"node-twitter-api": "*",
+		"optimist": "*",
 		"pg": "*",
-		"node-twitter-api": "*"
+		"underscore": "*"
 	}
 }
